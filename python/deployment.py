@@ -36,7 +36,6 @@ def deploy(conf):
     resource_group = conf["ACI"]["RESOURCE_GROUP"]
     name = conf["ACI"]["NAME"]
     deployfile = ROOT / "deployment.yml"
-    print(deployfile.exists())
     runstr = (
         "az container create"
         f" --resource-group {resource_group}"
@@ -45,21 +44,15 @@ def deploy(conf):
     )
     print(runstr.split())
     rc = subprocess.run(runstr.split(), shell=True, check=True, capture_output=True)
-    # if rc.stdout:
-    #     print(json.dumps(json.loads(rc.stdout), indent=4))
-    # else:
-    #     print(json.dumps(json.loads(rc.stderr), indent=4))
 
 
-def delete_container(conf):
-    resource_group = conf["ACI"]["RESOURCE_GROUP"]
-    name = conf["ACI"]["NAME"]
+def delete_container(**kwargs):
     runstr = (
         "az container delete"
-        f" --resource-group {resource_group}"
-        f" --name {name}"
+        " --resource-group {RESOURCE_GROUP}"
+        " --name {NAME}"
         " --yes"
-    )
+    ).format(**kwargs)
     print(runstr.split())
     rc = subprocess.run(runstr.split(), shell=True, check=True, capture_output=True)
 

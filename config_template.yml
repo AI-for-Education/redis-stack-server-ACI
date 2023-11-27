@@ -5,26 +5,20 @@ GLOBAL:
 
 # Azure Container Registry for redis container
 ACR:
-  RESOURCE_GROUP:
   NAME:
-  LOCATION:
   CONTAINER:
     NAME:
     VERSION:
 
 # Azure Container Instance for running redis server
 ACI:
-  RESOURCE_GROUP:
   NAME:
-  LOCATION:
-  CPU: 1.0
-  MEMGB: 1.5
+  CPU:
+  MEMGB:
   # Optional (defaults to ACI.NAME)
   DOMAIN:
 
 # Azure Storage Account for cert
 ASA:
-  RESOURCE_GROUP:
   NAME:
-  LOCATION:
   SHARE:

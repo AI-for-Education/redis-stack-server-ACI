@@ -9,8 +9,11 @@ def gen_reggroup(**kwargs):
     subprocess.run(runstr.split(), shell=True, check=True, capture_output=True)
 
 
-def del_reggroup(**kwargs):
-    runstr = ("az group delete" " --name {RESOURCE_GROUP}").format(**kwargs)
+def delete_reggroup(**kwargs):
+    runstr = ("az group delete" " --name {RESOURCE_GROUP} --yes").format(**kwargs)
     print(runstr.split())
-    subprocess.run(runstr.split(), shell=True, check=True, capture_output=True)
+    try:
+        subprocess.run(runstr.split(), shell=True, check=True, capture_output=True)
+    except:
+        pass
 

@@ -24,7 +24,7 @@ def gen_redconf(**kwargs):
             ngtem.format(**kwargs)
         )
 
-def gen_rf(**kwargs):
+def gen_runfirst(**kwargs):
     with open(TEM / "run_first_template.txt") as f:
         ngtem = f.read()
 

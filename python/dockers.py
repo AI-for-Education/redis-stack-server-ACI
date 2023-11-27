@@ -45,7 +45,15 @@ def push_docker(conf):
     runstr = f"{exec} {regname} {imagename} {imagever}"
     print(runstr.split())
     rc = subprocess.run(runstr.split(), shell=True, check=True, capture_output=True)
-    print(rc.stderr)
+    # print(rc.stderr)
+
+
+def check_for_docker():
+    try:
+        subprocess.run(["docker", "info"], shell=True, check=True, capture_output=True)
+        return True
+    except:
+        return False
 
 
 if __name__ == "__main__":
