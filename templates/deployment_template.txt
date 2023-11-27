@@ -1,0 +1,50 @@
+api-version: 2019-12-01
+location: {AZURE_LOCATION}
+name: {APP_NAME}
+properties:
+ containers:
+ - name: {NAME_OF_CONTAINER}
+   properties:
+     image: {NAME_OF_REGISTRY}.azurecr.io/{NAME_OF_CONTAINER}:{VERSION}
+     ports:
+     - port: 80
+       protocol: TCP
+     - port: 443
+       protocol: TCP
+     - port: 6379
+       protocol: TCP
+     - port: 6381
+       protocol: TCP
+     volumeMounts: # Array of volume mounts for the instance
+     - name: {VOLUME_NAME}
+       mountPath: /mnt/letsencrypt
+     resources:
+       requests:
+         cpu: {CPU}
+         memoryInGB: {MEMGB}
+ imageRegistryCredentials:
+ - server: {NAME_OF_REGISTRY}.azurecr.io
+   username: {NAME_OF_REGISTRY}
+   password: {REG_PASS}
+ restartPolicy: Never
+ ipAddress:
+   ports:
+   - port: 443
+     protocol: TCP
+   - port: 80
+     protocol: TCP
+   - port: 6379
+     protocol: TCP
+   - port: 6381
+     protocol: TCP
+   type: Public
+   dnsNameLabel: {FQDN_NAME}
+ volumes: # Array of volumes available to the instances
+ - name: {VOLUME_NAME}
+   azureFile:
+     shareName: {NAME_OF_SHARE}
+     storageAccountName: {NAME_OF_STORAGE}
+     storageAccountKey: {STORAGE_KEY}
+ osType: Linux
+tags: null
+type: Microsoft.ContainerInstance/containerGroups

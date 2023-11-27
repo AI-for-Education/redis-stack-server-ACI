@@ -1,0 +1,10 @@
+name: redis_server
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - pip:
+    - pyyaml
+    - python-dotenv
+    - black
+    - ipykernel

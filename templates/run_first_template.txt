@@ -1,0 +1,7 @@
+#! /bin/bash
+
+nginx -t &&
+service nginx start &&
+sleep 300 &&
+certbot --nginx -d {DOMAIN}.{LOCATION}.azurecontainer.io --non-interactive --agree-tos --register-unsafely-without-email --redirect &&
+tar -cpzf /mnt/letsencrypt/etc.tar.gz -C / etc/letsencrypt/
