@@ -2,6 +2,7 @@
 GLOBAL:
   RESOURCE_GROUP:
   LOCATION:
+  SLEEP: 300
 
 # Azure Container Registry for redis container
 ACR:

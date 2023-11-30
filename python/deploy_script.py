@@ -110,8 +110,9 @@ def main(opt):
     if opt.first:
         first(dry_run=opt.dry_run)
         if opt.final:
+            conf = load_conf()
             print("Waiting for SSL cert...")
-            time.sleep(360)
+            time.sleep(conf["GLOBAL"]["SLEEP"] + 60)
             print("Done")
 
     if opt.final:
