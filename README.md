@@ -6,14 +6,14 @@ Works on Windows or Linux (Mac OS not tested yet).
 
 ### Installation
 #### Step 1: Install Docker
-Requires Docker to be installed and running on the system. Follow istructions here:
+Requires Docker to be installed and running on the system. Follow instructions here:
  - [Windows](https://docs.docker.com/desktop/install/windows-install/)
  - [Linux](https://docs.docker.com/desktop/install/linux-install/)
 
 Additionally, for Windows, you need the Docker WSL2 backend, which also requires installing WSL2 features on Windows. For more detailed instructions, see [WSL2 Docker](https://docs.docker.com/desktop/wsl/)
 
 #### Step 2: Install Azure Command Line Interface (CLI)
-Requires Azure CLI to be installed on the system. Follow istructions here:
+Requires Azure CLI to be installed on the system. Follow instructions here:
  - [Windows](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli)
  - [Linux](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt)
 
@@ -30,7 +30,7 @@ But any python environment with pyyaml and python-dotenv installed should be fin
 
 #### config.yml
 
-Prior to running, you must create a file called `config.yml` in the repostory root directory, in which you set all of the following fields.
+Prior to running, you must create a file called `config.yml` in the repository root directory, in which you set all of the following fields.
 
 ```yaml
 # Global setting (anything set here will be used for all)
