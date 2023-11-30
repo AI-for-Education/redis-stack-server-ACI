@@ -87,7 +87,7 @@ Once installed and configured, the full deployment process can be run with:
 
 The process consists of 2 stages:
 
-1. All Azure resources are created and a preliminary container is deployed to the Azure Container Instance. The sole job of this preliminary container is to request a TLS certificate for the domain from https://letsencypt.org (via certbot). Before requesting the certificate, it waits for a time after launch (given in config.GLOBAL.SLEEP in seconds) to give time for the domain to be registered. Once the certificate has been received, it is saved to the file share and the container's job is finished
+1. All Azure resources are created and a preliminary container is deployed to the Azure Container Instance. The sole job of this preliminary container is to request a TLS certificate for the domain from https://letsencrypt.org (via certbot). Before requesting the certificate, it waits for a time after launch (given in config.GLOBAL.SLEEP in seconds) to give time for the domain to be registered. Once the certificate has been received, it is saved to the file share and the container's job is finished
 2. The preliminary container is deleted and and the final Redis Stack server container is deployed to the same Azure Container Instance. The final container runs the Redis Stack server with the provided TLS certificate and periodically (every month) renews the certificate.
 
 The logic of the process is adapted for Redis from the following guide to deploying Streamlit on Azure Container Instance: [Part 1](https://towardsdatascience.com/beginner-guide-to-streamlit-deployment-on-azure-f6618eee1ba9), [Part 2](https://towardsdatascience.com/beginner-guide-to-streamlit-deployment-on-azure-part-2-cf14bb201b8e)
