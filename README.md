@@ -72,11 +72,13 @@ Most names can be any format that you choose, but some cannot contain hyphens or
 
 #### .env
 
-In addition to the configuration file, you must alse set a single environment variable:
+In addition to the configuration file, you may also set a single environment variable:
 
     REDIS_KEY="my-redis-key"
 
-This will be the key that is required to connect to the Redis server once it has been deployed. Choose any string that you want here, but it cannot be empty. You can either set this environment variable manually or create a file called .env in the repository root with this line in it.
+This will be the key that is required to connect to the Redis server once it has been deployed. Choose any string that you want here. You can either set this environment variable manually or create a file called .env in the repository root with this line in it.
+
+Alternately, if you choose not to set this environment variable, or if it is an empty string, a random key will be generated for you. You can find this key afterwards in the generated redis_pass.txt file.
 
 ### Run
 

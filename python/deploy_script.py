@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 import os
 import time
+import secrets
 
 from dotenv import load_dotenv
 
@@ -47,7 +48,10 @@ def final(dry_run=False):
     ##
     conf = load_conf()
     ##
-    gen_redconf(PASS=os.environ.get("REDIS_KEY", ""), **conf["ACI"])
+    redpass = os.environ.get("REDIS_KEY", "")
+    if len(redpass) == 0:
+        redpass = secrets.token_urlsafe(16)
+    gen_redconf(PASS=redpass, **conf["ACI"])
     gen_ngconf(**conf["ACI"], first=False)
     gen_deploy(conf)
     ##

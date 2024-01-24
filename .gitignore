@@ -168,3 +168,4 @@ tests/
 config.yml
 redis.conf
 deployment.yml
+redis_pass.txt

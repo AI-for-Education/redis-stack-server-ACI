@@ -24,6 +24,9 @@ def gen_redconf(**kwargs):
             ngtem.format(**kwargs)
         )
 
+    with open(ROOT / "redis_pass.txt", "w") as f:
+        f.write(kwargs["PASS"])
+
 def gen_runfirst(**kwargs):
     with open(TEM / "run_first_template.txt") as f:
         ngtem = f.read()
