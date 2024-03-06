@@ -17,7 +17,7 @@ properties:
        protocol: TCP
      volumeMounts: # Array of volume mounts for the instance
      - name: {VOLUME_NAME}
-       mountPath: /mnt/letsencrypt
+       mountPath: /mnt/data
      resources:
        requests:
          cpu: {CPU}

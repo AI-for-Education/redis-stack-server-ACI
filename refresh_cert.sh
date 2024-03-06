@@ -1,6 +1,6 @@
 #! /bin/bash
 /usr/bin/certbot renew --quiet &&
-tar -cpzf /mnt/letsencrypt/etc.tar.gz -C / etc/letsencrypt/ &&
+tar -cpzf /mnt/data/letsencrypt/etc.tar.gz -C / etc/letsencrypt/ &&
 CERT_FILE=$(redis-cli --raw config get tls-cert-file | tail -n1) &&
 KEY_FILE=$(redis-cli --raw config get tls-key-file | tail -n1) &&
 echo $CERT_FILE &&

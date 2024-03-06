@@ -1,7 +1,8 @@
 requirepass {PASS}
-port 6379
+port 0
 tls-port 6381
 tls-cert-file /etc/letsencrypt/live/{DOMAIN}.{LOCATION}.azurecontainer.io/fullchain.pem
 tls-key-file /etc/letsencrypt/live/{DOMAIN}.{LOCATION}.azurecontainer.io/privkey.pem
 tls-auth-clients no
 loglevel verbose
+appendonly yes

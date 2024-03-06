@@ -1,5 +1,5 @@
 ## Introduction
-A system for automated deployment of a TLS-enabled Redis Stack server on an Azure Container Instance.
+A system for automated deployment of a TLS-enabled Redis Stack server with persistent storage on an Azure Container Instance.
 
 ## How to use
 Works on Windows or Linux (Mac OS not tested yet).
@@ -54,7 +54,7 @@ ACI:
   # Optional (defaults to ACI.NAME)
   DOMAIN: my-domain-name
 
-# Azure Storage Account for cert
+# Azure Storage Account for cert and database persistence files
 ASA:
   NAME: mystorageaccount
   SHARE: my-file-share
@@ -125,6 +125,6 @@ With certbot you have a rate limit of 50 certificate requests per week for a giv
 After successfully deploying the Redis Stack server, you can connect to it via any Redis API:
 
 - host: `{ACI.DOMAIN}.{GLOBAL.LOCATION}.azurecontainer.io`
-- TCP port: `6379`
+- TCP port: `disabled`
 - TLS port: `6381`
 - password: `{REDIS_KEY}`

@@ -1,7 +1,9 @@
 #! /bin/bash
 
+mkdir /mnt/data/letsencrypt
+mkdir /mnt/data/redis
 nginx -t &&
 service nginx start &&
 sleep {SLEEP} &&
 certbot --nginx -d {DOMAIN}.{LOCATION}.azurecontainer.io --non-interactive --agree-tos --register-unsafely-without-email --redirect &&
-tar -cpzf /mnt/letsencrypt/etc.tar.gz -C / etc/letsencrypt/
+tar -cpzf /mnt/data/letsencrypt/etc.tar.gz -C / etc/letsencrypt/
