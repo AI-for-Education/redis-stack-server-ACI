@@ -1,7 +1,7 @@
 import subprocess
 import json
 
-from load_config import load_conf
+from .load_config import load_conf
 
 
 def gen_contreg(**kwargs):
@@ -31,8 +31,3 @@ def get_regcred(**kwargs):
     print(runstr.split())
     rc = subprocess.run(runstr.split(), shell=True, check=True, capture_output=True)
     return json.loads(rc.stdout)["passwords"][-1]["value"]
-
-if __name__ == "__main__":
-    conf = load_conf()
-    gen_contreg(**conf["ACR"])
-    del_contreg(**conf["ACR"])

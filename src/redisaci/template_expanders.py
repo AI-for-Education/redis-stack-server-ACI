@@ -1,8 +1,8 @@
 from argparse import ArgumentParser
 
-from common import ROOT, TEM
+from .common import ROOT, TEM
 
-def gen_ngconf(first=False, **kwargs):
+def gen_ngconf(configfile, first=False, **kwargs):
     if first:
         ngfile = TEM / "nginx_template_first.txt"
     else:
@@ -10,28 +10,28 @@ def gen_ngconf(first=False, **kwargs):
     with open(ngfile) as f:
         ngtem = f.read()
 
-    with open(ROOT / "nginx.conf", "w") as f:
+    with open(configfile.parent / "nginx.conf", "w") as f:
         f.write(
             ngtem.format(**kwargs)
         )
 
-def gen_redconf(**kwargs):
+def gen_redconf(configfile, **kwargs):
     with open(TEM / "redis_template.txt") as f:
         ngtem = f.read()
 
-    with open(ROOT / "redis.conf", "w") as f:
+    with open(configfile.parent / "redis.conf", "w") as f:
         f.write(
             ngtem.format(**kwargs)
         )
 
-    with open(ROOT / "redis_pass.txt", "w") as f:
+    with open(configfile.parent / "redis_pass.txt", "w") as f:
         f.write(kwargs["PASS"])
 
-def gen_runfirst(**kwargs):
+def gen_runfirst(configfile, **kwargs):
     with open(TEM / "run_first_template.txt") as f:
         ngtem = f.read()
 
-    with open(ROOT / "run_first.sh", "w", newline="\n") as f:
+    with open(configfile.parent / "run_first.sh", "w", newline="\n") as f:
         f.write(
             ngtem.format(**kwargs)
         )

@@ -1,13 +1,13 @@
 import subprocess
 import json
 
-from common import ROOT, TEM
-from load_config import load_conf
-from container_registry import get_regcred
-from storage_share import get_storecred
+from .common import ROOT, TEM
+from .load_config import load_conf
+from .container_registry import get_regcred
+from .storage_share import get_storecred
 
 
-def gen_deploy(conf):
+def gen_deploy(configfile, conf):
     volname = f'{"".join(conf["ACI"]["NAME"].split("-"))}vol'
     kwargs = dict(
         AZURE_LOCATION=conf["ACI"]["LOCATION"],
@@ -28,14 +28,14 @@ def gen_deploy(conf):
     with open(TEM / "deployment_template.txt") as f:
         ngtem = f.read()
 
-    with open(ROOT / "deployment.yml", "w") as f:
+    with open(configfile.parent / "deployment.yml", "w") as f:
         f.write(ngtem.format(**kwargs))
 
 
-def deploy(conf):
+def deploy(configfile, conf):
     resource_group = conf["ACI"]["RESOURCE_GROUP"]
     name = conf["ACI"]["NAME"]
-    deployfile = ROOT / "deployment.yml"
+    deployfile = configfile.parent / "deployment.yml"
     runstr = (
         "az container create"
         f" --resource-group {resource_group}"
@@ -56,7 +56,3 @@ def delete_container(**kwargs):
     print(runstr.split())
     rc = subprocess.run(runstr.split(), shell=True, check=True, capture_output=True)
 
-
-if __name__ == "__main__":
-    conf = load_conf()
-    gen_deploy(conf)

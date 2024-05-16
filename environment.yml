@@ -4,7 +4,5 @@ channels:
 dependencies:
   - python=3.10
   - pip:
-    - pyyaml
-    - python-dotenv
-    - black
+    - .
     - ipykernel

@@ -1,13 +1,12 @@
 import yaml
 
-from common import ROOT, TEM
+from .common import ROOT, TEM
 
-def load_conf():
-    conffile = ROOT / "config.yml"
-    if not conffile.exists():
-        raise ValueError(f"{str(conffile)} doesn't exist")
+def load_conf(configfile):
+    if not configfile.exists():
+        raise ValueError(f"{str(configfile)} doesn't exist")
 
-    with open(conffile) as f:
+    with open(configfile) as f:
         conf = yaml.safe_load(f)
     
     globald = conf.get("GLOBAL", {})
@@ -18,6 +17,3 @@ def load_conf():
         conf["ACI"]["DOMAIN"] = conf["ACI"]["NAME"]
         
     return conf
-
-if __name__ == "__main__":
-    print(load_conf())

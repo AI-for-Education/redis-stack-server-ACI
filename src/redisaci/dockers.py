@@ -2,14 +2,15 @@ import platform
 import subprocess
 import json
 import os
+from shutil import copyfile
 
-from common import ROOT, CONT
-from load_config import load_conf
+from .common import ROOT, CONT, COPYLIST
+from .load_config import load_conf
 
 PLATSTR = platform.system()
 
 
-def build_docker(conf, first=False):
+def build_docker(configfile, conf, first=False):
     imagename = conf["ACR"]["CONTAINER"]["NAME"]
     imagever = conf["ACR"]["CONTAINER"]["VERSION"]
     rediskey = os.environ.get("REDIS_KEY", "")
@@ -23,6 +24,8 @@ def build_docker(conf, first=False):
     if first:
         dockerfile = (ROOT / "Dockerfile_first").as_posix()
     else:
+        for file in COPYLIST:
+            copyfile(ROOT / file, configfile.parent / file)
         dockerfile = (ROOT / "Dockerfile").as_posix()
     runstr = f"{exec} {imagename} {imagever} {dockerfile} {rediskey}"
     print(runstr.split())
@@ -54,8 +57,3 @@ def check_for_docker():
         return True
     except:
         return False
-
-
-if __name__ == "__main__":
-    conf = load_conf()
-    build_docker(conf, False)

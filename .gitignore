@@ -165,7 +165,8 @@ nginx.conf
 run_first.sh
 test_commands.txt
 tests/
-config.yml
+*config.yml
+*config.yaml
 redis.conf
 deployment.yml
 redis_pass.txt

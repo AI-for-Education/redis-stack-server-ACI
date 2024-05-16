@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tools.setuptools]
+packages = [{include = "src"}]
+
+[tool.setuptools.package-data]
+"*" = ["container_scripts/*", "templates/*", "Dockerfile*", "*.sh"]
+
+[project]
+name = "redis-stack-server-aci"
+version = "0.1.0"
+requires-python = ">=3.8, <=3.12"
+dependencies = [
+    "pyyaml",
+    "python-dotenv",
+]
+
+[project.scripts]
+redis-stack-server-aci = "redisaci.deploy_script:main"

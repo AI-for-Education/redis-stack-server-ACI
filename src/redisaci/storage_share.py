@@ -1,7 +1,7 @@
 import subprocess
 import json
 
-from load_config import load_conf
+from .load_config import load_conf
 
 
 def gen_storacc(**kwargs):
@@ -45,10 +45,3 @@ def get_storecred(**kwargs):
     rc = subprocess.run(runstr.split(), shell=True, check=True, capture_output=True)
     return json.loads(rc.stdout)[-1]["value"]
 
-
-
-if __name__ == "__main__":
-    conf = load_conf()
-    gen_storacc(**conf["ASA"])
-    gen_storshare(**conf["ASA"])
-    del_storacc(**conf["ASA"])

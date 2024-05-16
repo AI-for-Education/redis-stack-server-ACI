@@ -26,11 +26,15 @@ This creates a conda environment called ```redis_server``` and installs the pack
 
 But any python environment with pyyaml and python-dotenv installed should be fine.
 
+To test that the package has been correctly installed, open a terminal, activate the appropriate environment (if applicable), and run:
+
+    redis-stack-server-aci --help
+
 ### Configuration
 
 #### config.yml
 
-Prior to running, you must create a file called `config.yml` in the repository root directory, in which you set all of the following fields.
+Prior to running, you must create a configuration file in yaml format, in which you set all of the following fields.
 
 ```yaml
 # Global setting (anything set here will be used for all)
@@ -78,14 +82,18 @@ In addition to the configuration file, you may also set a single environment var
 
 This will be the key that is required to connect to the Redis server once it has been deployed. Choose any string that you want here. You can either set this environment variable manually or create a file called .env in the repository root with this line in it.
 
-Alternately, if you choose not to set this environment variable, or if it is an empty string, a random key will be generated for you. You can find this key afterwards in the generated redis_pass.txt file.
+Alternately, if you choose not to set this environment variable, or if it is an empty string, a random key will be generated for you. You can find this key afterwards in the generated redis_pass.txt file, which is saved to the same folder as your config file.
 
 ### Run
 
 #### Full process
-Once installed and configured, the full deployment process can be run with:
+Once the config file has been created, the full deployment process can be run with:
 
-    python ./python/deploy_script.py --full
+    redis-stack-server-aci --config "{path/to/config.yml}" --full
+
+For example, if you are on Windows and the config file you want to use is `C:\configdir\config.yml`, you would run:
+
+    redis-stack-server-aci --config "C:\configdir\config.yml" --full
 
 The process consists of 2 stages:
 
@@ -100,19 +108,19 @@ It is possible that 300 seconds is not long enough to wait for the domain to be 
 
 You can also choose to run the 2 stages separately. To run only the first stage:
 
-    python ./python/deploy_script.py --first
+    redis-stack-server-aci --config "{path/to/config.yml}" --first
 
 On Azure portal you can navigate to the container instance and view and refresh the running logs to see if the certificate is successfully generated. You can also navigate to and refresh the file share to check for this.
 
 Once happy, you can then run the second stage with:
 
-    python ./python/deploy_script.py --final
+    redis-stack-server-aci --config "{path/to/config.yml}" --final
 
 #### Delete all resources
 
 If you want to remove all Azure resources created by the process, you can run:
 
-    python ./python/deploy_script.py --clean
+    redis-stack-server-aci --config "{path/to/config.yml}" --clean
 
 This will delete everything in the resource group that you created, taking you back to the very start.
 
