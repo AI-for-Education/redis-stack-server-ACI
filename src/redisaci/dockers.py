@@ -25,7 +25,14 @@ def build_docker(configfile, conf, first=False):
         dockerfile = (ROOT / "Dockerfile_first").as_posix()
     else:
         for file in COPYLIST:
-            copyfile(ROOT / file, configfile.parent / file)
+            infile = ROOT / file
+            outfile = configfile.parent / file
+            ### force LF on .sh files
+            if infile.suffix == ".sh":
+                with open(infile) as fin, open(outfile, "w", newline="\n") as fout:
+                    fout.write(fin.read())
+            else:
+                copyfile(infile, outfile)
         dockerfile = (ROOT / "Dockerfile").as_posix()
     runstr = f"{exec} {imagename} {imagever} {dockerfile} {rediskey}"
     print(runstr.split())
