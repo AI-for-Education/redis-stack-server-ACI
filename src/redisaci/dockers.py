@@ -10,10 +10,10 @@ from .load_config import load_conf
 PLATSTR = platform.system()
 
 
-def build_docker(configfile, conf, first=False):
+def build_docker(configfile, conf, rediskey, first=False):
     imagename = conf["ACR"]["CONTAINER"]["NAME"]
     imagever = conf["ACR"]["CONTAINER"]["VERSION"]
-    rediskey = os.environ.get("REDIS_KEY", "")
+    rediskey = rediskey
 
     if PLATSTR == "Windows":
         exec = (CONT / "build_image.bat").as_posix()

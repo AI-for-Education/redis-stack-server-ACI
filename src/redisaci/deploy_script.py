@@ -57,7 +57,7 @@ def final(configfile, dry_run=False):
     if not dry_run:
         clean_container_instance(configfile)
         ##
-        build_docker(configfile, conf, first=False)
+        build_docker(configfile, conf, rediskey=redpass, first=False)
         push_docker(conf)
         ##
         deploy(configfile, conf)
